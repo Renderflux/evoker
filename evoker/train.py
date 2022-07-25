@@ -16,14 +16,14 @@ SCRAMBED_PATH = "evoker/data/scrambled.txt"
 datasets.disable_caching()
 
 def train(epochs: int = EPOCHS):
-    with open(TRAINING_DATA_PATH) as infile:
+    with open(TRAINING_DATA_PATH, encoding='utf-8') as infile:
         all_prompts = infile.read().strip().split("\n")
 
     if not all_prompts:
         raise Exception("Read 0 prompts from prompt file")
 
     # scramble the prompts so the model doesn't learn association between lines
-    with open(SCRAMBED_PATH, "w+") as fp:
+    with open(SCRAMBED_PATH, "w+", encoding='utf-8') as fp:
         for _ in range(4):
             random.shuffle(all_prompts)
             fp.write(END_TOKEN.join(all_prompts) + END_TOKEN)
