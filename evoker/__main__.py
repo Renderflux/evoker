@@ -1,16 +1,16 @@
 import sys
 
 def main():
-    match sys.argv[1]:
-        case "serve":
-            import server
-            server.main()
-        case "train":
-            import train
-            train.train(int(sys.argv[2]))
-        case "predict":
-            import predict
-            print(predict.predict(" ".join(sys.argv[2:])))
+    action = sys.argv[1]
+    if action == "serve":
+        import server
+        server.main()
+    elif action == "train":
+        import train
+        train.train(int(sys.argv[2]))
+    elif action == "predict":
+        import predict
+        print(predict.predict(" ".join(sys.argv[2:])))
 
 if __name__ == "__main__":
     main()

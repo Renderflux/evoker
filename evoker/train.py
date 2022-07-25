@@ -15,7 +15,7 @@ SCRAMBED_PATH = "evoker/data/scrambled.txt"
 
 datasets.disable_caching()
 
-def train(epochs: int = EPOCHS):
+def train(epochs = EPOCHS):
     with open(TRAINING_DATA_PATH, encoding='utf-8') as infile:
         all_prompts = infile.read().strip().split("\n")
 

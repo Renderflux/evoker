@@ -20,14 +20,14 @@ tokenizer = AutoTokenizer.from_pretrained("distilgpt2")
 model = AutoModelForCausalLM.from_pretrained("./model")
 
 def predict(
-    prompt: str,
-    amount: int = 1,
-    max_length: int = 50,
-    min_length: int = 10,
-    temperature: float = 1.6,
-    top_k: int = 150,
-    top_p: float = 0.9,
-) -> str:
+    prompt,
+    amount = 1,
+    max_length = 50,
+    min_length = 10,
+    temperature = 1.6,
+    top_k = 150,
+    top_p = 0.9,
+):
     encoded_prompt = tokenizer(prompt, add_special_tokens=False, return_tensors="pt").input_ids
     encoded_prompt = encoded_prompt.to(model.device)
 
