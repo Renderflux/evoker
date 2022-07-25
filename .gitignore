@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+model/pytorch_model.bin
+model/config.json
+evoker/data/scrambled.txt
+evoker/data/cached_lm_GPT2TokenizerFast_1024_scrambled.txt
