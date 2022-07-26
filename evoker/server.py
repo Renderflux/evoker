@@ -1,9 +1,10 @@
 from os import getenv
 import asyncio
 import concurrent.futures
-from time import thread_time
 
 from sanic import Sanic, json
+from cors import add_cors_headers
+from options import setup_options
 
 import errors
 
@@ -39,6 +40,12 @@ async def predict_prompt(request):
     return json({
         "predictions": result
     })
+
+# Add OPTIONS handlers to any route that is missing it
+app.register_listener(setup_options, "before_server_start")
+
+# Fill in CORS headers
+app.register_middleware(add_cors_headers, "response")
 
 def main():
     app.run(host=getenv("HOST", "0.0.0.0"), port=int(getenv("PORT", "8000")), debug=getenv("DEBUG", None) is not None)
