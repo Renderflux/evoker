@@ -5,4 +5,4 @@ RUN pip install -r /requirements.txt
 
 ADD evoker /evoker
 
-CMD ["python", "evoker", "serve"]
+CMD ["python", "evoker", "predict", "a", "beautiful"]
