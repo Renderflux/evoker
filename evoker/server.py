@@ -34,10 +34,8 @@ async def predict_prompt(request):
         raise errors.InvalidAmountError()
 
     # start the blocking call
-    print("predicting...")
     result = await loop.run_in_executor(thread_pool, predict.predict, request.json["prompt"], request.json["amount"])
 
-    print("done predicting")
     return json({
         "predictions": result
     })
