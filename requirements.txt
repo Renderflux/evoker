@@ -1,0 +1,4 @@
+sanic
+transformers
+datasets
+torch
