@@ -1,6 +1,7 @@
 from os import getenv
 import asyncio
 import concurrent.futures
+from time import thread_time
 
 from sanic import Sanic, json
 
@@ -11,6 +12,8 @@ import predict
 
 app = Sanic("evoker")
 app.config.FALLBACK_ERROR_FORMAT = "json"
+
+thread_pool = concurrent.futures.ProcessPoolExecutor()
 
 @app.route("/")
 async def index(request):
@@ -31,11 +34,10 @@ async def predict_prompt(request):
         raise errors.InvalidAmountError()
 
     # start the blocking call
-    with concurrent.futures.ProcessPoolExecutor() as pool:
-        result = await loop.run_in_executor(pool, predict.predict, request.json["prompt"], request.json["amount"])
-        return json({
-            "predictions": result
-        })
+    result = await loop.run_in_executor(thread_pool, predict.predict, request.json["prompt"], request.json["amount"])
+    return json({
+        "predictions": result
+    })
 
 def main():
     app.run(host=getenv("HOST", "0.0.0.0"), port=int(getenv("PORT", "8000")), debug=getenv("DEBUG", None) is not None)
