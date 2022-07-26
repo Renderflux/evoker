@@ -17,7 +17,7 @@ SCRAMBED_PATH = "evoker/data/scrambled.txt"
 datasets.disable_caching()
 
 tokenizer = AutoTokenizer.from_pretrained("distilgpt2")
-model = AutoModelForCausalLM.from_pretrained("./model")
+model = AutoModelForCausalLM.from_pretrained("kaj/evoker")
 
 def predict(
     prompt,
