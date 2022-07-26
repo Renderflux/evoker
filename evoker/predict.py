@@ -28,9 +28,12 @@ def predict(
     top_k = 150,
     top_p = 0.9,
 ):
+
+    print("tokenizing...")
     encoded_prompt = tokenizer(prompt, add_special_tokens=False, return_tensors="pt").input_ids
     encoded_prompt = encoded_prompt.to(model.device)
 
+    print("generating...")
     output_sequences = model.generate(
         input_ids=encoded_prompt,
         max_length=max_length,
@@ -44,6 +47,7 @@ def predict(
     )
 
     predicted = []
+    print("decoding...")
     for generated_sequence in output_sequences:
         generated_sequence = generated_sequence.tolist()
         text = tokenizer.decode(generated_sequence, clean_up_tokenization_spaces=True, skip_special_tokens=True)
