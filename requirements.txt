@@ -2,3 +2,4 @@ sanic
 transformers
 datasets
 torch
+sentry-sdk

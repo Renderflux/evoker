@@ -1,4 +1,23 @@
 from os import getenv
+
+if (sentry_dsn := getenv("SENTRY_DSN", None)) is not None:
+    try:
+        import sentry_sdk
+        sentry_sdk.init(
+            dsn=sentry_dsn,
+
+            # Set traces_sample_rate to 1.0 to capture 100%
+            # of transactions for performance monitoring.
+            # We recommend adjusting this value in production.
+            traces_sample_rate=1.0
+        )
+
+        print("Sentry enabled")
+    except ImportError:
+        print("Sentry disabled")
+else:
+    print("No sentry dsn was provided. To enable sentry alerts, set the SENTRY_DSN environment variable")
+
 import asyncio
 import concurrent.futures
 
