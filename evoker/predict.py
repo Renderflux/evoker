@@ -1,20 +1,9 @@
-import random
 import os
 import random
 import sys
 from transformers import (
     AutoTokenizer, AutoModelForCausalLM,
-    TextDataset, DataCollatorForLanguageModeling,
-    Trainer, TrainingArguments
 )
-import datasets
-
-EPOCHS = 10
-END_TOKEN = "<|endoftext|>"
-TRAINING_DATA_PATH = "evoker/data/prompts.txt"
-SCRAMBED_PATH = "evoker/data/scrambled.txt"
-
-datasets.disable_caching()
 
 tokenizer = AutoTokenizer.from_pretrained("distilgpt2")
 model = AutoModelForCausalLM.from_pretrained(os.getenv("TRANSFORMER_MODEL", "kaj/evoker"))
